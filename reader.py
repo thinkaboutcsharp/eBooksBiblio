@@ -22,11 +22,12 @@ def read_books(parent, keynames):
             biblio.extend(read_books(full_child, keynames))
         
         elif os.path.isfile(full_child):
-            if not child.endswith('.pdf'):
+            if not child.endswith('.pdf') or child.startswith('._'):
                 continue
             if child == 'old.pdf':
                 continue
             
+            child = child.replace('%20', ' ')
             biblio.append({ keynames['file']: child, keynames['directory']: parent })
     
     return biblio
